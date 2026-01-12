@@ -45,6 +45,9 @@ setup(
         # Dashboard
         "streamlit>=1.30.0",
         
+        # Data download
+        "kagglehub>=0.2.0",
+
         # Database
         "sqlalchemy>=2.0.0",
         "psycopg2-binary>=2.9.0",
