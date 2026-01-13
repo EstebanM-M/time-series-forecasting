@@ -5,7 +5,7 @@ Multi-model time series forecasting system with interactive dashboard comparing 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Portfolio Project** by [Esteban](https://github.com/tu-usuario) | [LinkedIn](tu-linkedin) | [Live Demo](#) (Coming Soon)
+> **Portfolio Project** by [Esteban](https://github.com/EstebanM-M) | [LinkedIn](https://www.linkedin.com/in/esteban-morales-mahecha/) | [Live Demo](#) (Coming Soon)
 
 ---
 
@@ -112,7 +112,7 @@ Upload any CSV time series data through the dashboard:
 ### Quick Start
 ```bash
 # 1. Clone repository
-git clone https://github.com/tu-usuario/time-series-forecasting.git
+git clone https://github.com/EstebanM-M/time-series-forecasting.git
 cd time-series-forecasting
 
 # 2. Create virtual environment
@@ -188,7 +188,8 @@ Current development phase: **Day 1-2 / 6 days**
 - [x] Data download pipeline (Kaggle + synthetic)
 - [x] Data validation and cleaning
 - [x] Data exploration and analysis
-- [ ] Prophet model implementation
+- [x] Prophet model implementation
+- [x] Evaluation metrics system
 - [ ] ARIMA/SARIMA implementation
 - [ ] XGBoost for time series
 - [ ] LSTM neural network
@@ -304,9 +305,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Esteban**
 - Electronic Engineer (Escuela Colombiana de Ingeniería, 2024)
 - Transitioning to ML/AI Engineering
-- Portfolio: [website](#)
-- LinkedIn: [profile](#)
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- LinkedIn: [profile](https://www.linkedin.com/in/esteban-morales-mahecha/)
+- GitHub: [EstebanM-M](https://github.com/EstebanM-M)
 - Email: tu_email@example.com
 
 ---
@@ -337,24 +337,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ⭐ **If you find this project useful, please star the repository!**
 
 ---
-
-*Last updated: January 12, 2026*
-```
-
----
-
-## **2. Orden de las Secciones (Explicado)**
-```
-1. Título + Badges                    ← Primero
-2. Overview (qué es el proyecto)      ← Contexto
-3. Features (qué hace)                ← Funcionalidades
-4. Dataset (datos que usa)            ← ⭐ AQUÍ va tu sección de datos
-5. Tech Stack (tecnologías)           ← Stack técnico
-6. Installation (cómo instalar)       ← Setup
-7. Usage (cómo usar)                  ← Ejemplos
-8. Project Status (progreso)          ← Checklist
-9. Testing (cómo probar)              ← Tests
-10. Project Structure (estructura)     ← Organización
-11. Use Cases (aplicaciones)          ← Contexto de negocio
-12. Contributing + License + Author   ← Metadata
-13. Acknowledgments + Resources       ← Créditos
