@@ -182,7 +182,7 @@ streamlit run dashboard/app.py
 
 ## 📈 Project Status
 
-Current development phase: **Day 1-2 / 6 days**
+Current development phase: **Day 3**
 
 - [x] Project setup and structure
 - [x] Data download pipeline (Kaggle + synthetic)
@@ -307,7 +307,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Transitioning to ML/AI Engineering
 - LinkedIn: [profile](https://www.linkedin.com/in/esteban-morales-mahecha/)
 - GitHub: [EstebanM-M](https://github.com/EstebanM-M)
-- Email: tu_email@example.com
+- Email: Estebanmmahecha@outlook.com
 
 ---
 
