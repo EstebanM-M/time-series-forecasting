@@ -1,0 +1,125 @@
+"""
+ARIMA Model Training and Evaluation Demo
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path
+
+from forecasting.preprocessing.data_loader import DataLoader
+from forecasting.preprocessing.cleaner import DataCleaner
+from forecasting.models.arima_model import ARIMAForecaster
+from forecasting.evaluation.metrics import calculate_metrics, print_metrics
+
+# Set style
+sns.set_style('whitegrid')
+plt.rcParams['figure.figsize'] = (15, 6)
+
+
+def train_arima_demo():
+    """Demo of ARIMA model training and evaluation"""
+    
+    print("="*80)
+    print(" ARIMA MODEL TRAINING DEMO")
+    print("="*80)
+    
+    # Step 1: Load and prepare data
+    print("\n1️  Loading and preparing data...")
+    loader = DataLoader()
+    df = loader.load_pjm_sample()
+    
+    cleaner = DataCleaner()
+    df_clean = cleaner.clean(df, 'datetime', 'consumption_mw', freq='H')
+    
+    print(f"   ✓ Loaded {len(df_clean)} hourly records")
+    print(f"   ✓ Date range: {df_clean.index.min()} to {df_clean.index.max()}")
+    
+    # Step 2: Train/test split
+    print("\n2️  Splitting data (80% train, 20% test)...")
+    train_size = int(len(df_clean) * 0.8)
+    
+    train_df = df_clean[:train_size]
+    test_df = df_clean[train_size:]
+    
+    print(f"   ✓ Training set: {len(train_df)} records")
+    print(f"   ✓ Test set: {len(test_df)} records ({len(test_df)/24:.0f} days)")
+    
+    # Step 3: Initialize and train ARIMA
+    print("\n3️  Training ARIMA model...")
+    print("    This may take 30-60 seconds...")
+    
+    # ARIMA parameters
+    # (p, d, q) = (1, 1, 1) - simple ARIMA
+    # Seasonal: (P, D, Q, s) = (1, 1, 1, 24) - daily seasonality for hourly data
+    forecaster = ARIMAForecaster(
+        order=(1, 1, 1),
+        seasonal_order=(1, 1, 1, 24),  # 24-hour seasonality
+        enforce_stationarity=False,
+        enforce_invertibility=False
+    )
+    
+    forecaster.fit(train_df, value_col='consumption_mw')
+    
+    print("   ✓ Model trained successfully!")
+    
+    # Step 4: Evaluate model
+    print("\n4️  Evaluating model performance...")
+    
+    metrics = forecaster.evaluate_on_test(test_df, value_col='consumption_mw')
+    print_metrics(metrics, model_name="ARIMA")
+    
+    # Step 5: Forecast future
+    print("\n5️  Generating 7-day future forecast...")
+    
+    # Train on all data
+    forecaster_full = ARIMAForecaster(
+        order=(1, 1, 1),
+        seasonal_order=(1, 1, 1, 24),
+        enforce_stationarity=False,
+        enforce_invertibility=False
+    )
+    forecaster_full.fit(df_clean, value_col='consumption_mw')
+    
+    # Forecast 7 days (168 hours)
+    future_forecast = forecaster_full.predict(horizon=168)
+    
+    print("   ✓ Future forecast generated")
+    print("\n   First 24 hours of forecast:")
+    print(future_forecast.head(24))
+    
+    # Step 6: Model summary
+    print("\n6️  Model summary...")
+    # summary = forecaster_full.get_model_summary()
+    # print(summary)  # Can be very long
+    print("   ✓ Model summary available (use get_model_summary() to view)")
+    
+    # Step 7: Save model
+    print("\n7️  Saving trained model...")
+    model_path = forecaster_full.save_model('arima_energy_model.pkl')
+    print(f"   ✓ Model saved to: {model_path}")
+    
+    # Summary
+    print("\n" + "="*80)
+    print(" ARIMA TRAINING COMPLETE")
+    print("="*80)
+    print(f"\n Key Results:")
+    print(f"   • Test MAPE: {metrics['mape']:.2f}%")
+    print(f"   • Test RMSE: {metrics['rmse']:.2f} MW")
+    print(f"   • R² Score: {metrics['r2']:.4f}")
+    print(f"   • Forecast Bias: {metrics['forecast_bias']:.2f}%")
+    
+    if 'improvement_vs_baseline' in metrics:
+        print(f"   • Improvement vs Baseline: {metrics['improvement_vs_baseline']:.1f}%")
+    
+    print("\n Outputs:")
+    print(f"   • Trained model: {model_path}")
+    print(f"   • 7-day forecast: {len(future_forecast)} hourly predictions")
+    
+    print("="*80 + "\n")
+    
+    return forecaster_full, metrics, future_forecast
+
+
+if __name__ == "__main__":
+    forecaster, metrics, forecast = train_arima_demo()
