@@ -190,8 +190,8 @@ Current development phase: **Day 3**
 - [x] Data exploration and analysis
 - [x] Prophet model implementation
 - [x] Evaluation metrics system
-- [ ] ARIMA/SARIMA implementation
-- [ ] XGBoost for time series
+- [x] ARIMA/SARIMA implementation
+- [x] XGBoost for time series  (Best performer: 0.96% MAPE!)
 - [ ] LSTM neural network
 - [ ] Interactive Streamlit dashboard
 - [ ] Model comparison framework
